@@ -1,19 +1,58 @@
+const Post = require('../models/post_model'); // import the model to be used in the controller file
+
+const createPost = (async (req,res)=>{
+    const newPost = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        sender: req.body.sender
+    });
+    try { 
+        const savedPost = await newPost.save();
+        res.json(savedPost);
+    } catch (err) {
+        res.json({message: err});
+    } 
+});
+   
+const getAllPosts = async(req,res)=>{ // get all posts / get posts by sender
+    try {
+        let posts;
+        if(req.query.sender){
+            posts = await Post.find({sender: req.query.sender});
+        } else {
+        posts = await Post.find();
+        }
+        res.json(posts);
+    } catch (err) {
+        res.json({message: err});
+    }
+};
+const getPostById =async (req, res) => { // get post by id
+    const id = req.params.id;
+    try {
+        const post = await Post.findById(id);
+        res.json(post);
+    } catch (err) {
+        res.json({message: err});
+    }
+}
+const updatePost = async(req, res) => { // update a post
+    const id = req.params.id;
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(id, {content: 'new'});
+     res.json(updatedPost);
+    }catch (err) {
+        res.json({message: err});
+    };
+}
+const deleteAllPost = async(req, res) => { // delete all posts
+    try {
+        const removedPosts = await Post.deleteMany();
+        res.json(removedPosts);
+    } catch (err) {
+        res.json({message: err});
+    }
+}
 
 
-const createPost = (req, res) => {  // add a new post
-    res.send('Post created');
-}
-const getAllPosts = (req, res) => { // get all posts
-    res.send('Get all posts');
-}
-const getPostById = (req, res) => { // get post by id
-    res.send('Post by id');
-}
-const getPostByOwner = (req,res) => { // get post by owner
-    res.send('Post by owner');
-}
-const updatePost = (req, res) => { // update a post
-    res.send('Post updated');
-}
-
-module.exports = { createPost, getAllPosts, getPostById, getPostByOwner, updatePost }; // export the functions to be used in the routes file
+module.exports = { createPost, getAllPosts, getPostById, updatePost, deleteAllPost }; 

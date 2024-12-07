@@ -1,27 +1,27 @@
 ###
-POST http://localhost:3000/
+POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
     "title": "Post 1",
-    "content": "Content 1"
+    "content": "Content 1",
+    "sender": "owner"
 }
-
-
-###
-GET http://localhost:3000/
+// new post
 
 ###
-GET http://localhost:3000/post/:id
+GET http://localhost:3000/posts
+// get all posts
+###
+GET http://localhost:3000/posts/6754287f7c94145c6c7f3069
+// get post by id
+###
+GET http://localhost:3000/posts?sender=owner
+// get all posts by sender
+###
+PUT http://localhost:3000/posts/6754287f7c94145c6c7f3069
+// updates the content by id
 
 ###
-GET http://localhost:3000/post/
-
-###
-PUT http://localhost:3000/post/:id
-Content-Type: application/json
-
-{
-    "title": "Post 1",
-    "content": "Content 1"
-}
+DELETE http://localhost:3000/posts
+// delete all posts
