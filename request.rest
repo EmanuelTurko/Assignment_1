@@ -25,3 +25,30 @@ PUT http://localhost:3000/posts/6754287f7c94145c6c7f3069
 ###
 DELETE http://localhost:3000/posts
 // delete all posts
+
+###
+POST http://localhost:3000/posts/comments
+Content-Type: application/json
+
+{
+    "content": "Comment 1",
+    "sender": "owner2",
+    "postId": "6754287f7c94145c6c7f3069"
+}
+// new comment
+
+###
+GET http://localhost:3000/posts/comments
+//get all comments
+
+###
+PUT http://localhost:3000/posts/comments/675587377461a4c6e3d9dabf
+// updates the comment by id
+
+###
+DELETE http://localhost:3000/posts/comments?sender=owner2
+// delete all comments
+
+###
+GET http://localhost:3000/posts/comments?sender=owner2
+// get all comments by sender

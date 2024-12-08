@@ -16,4 +16,4 @@ const postSchema = new mongoose.Schema({
 });
 
 const Post = mongoose.model('Post', postSchema); 
-module.exports = Post  // export the model to be used in the controller file
+module.exports = Post 

@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const postsRouter = require('./routing/post_routes');
+const commentsRouter = require('./routing/comment_routes');
 
+app.use('/posts/comments', commentsRouter);
 app.use('/posts' , postsRouter);
 
 
